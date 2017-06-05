@@ -1,0 +1,29 @@
+{
+  "name": "styles-generator",
+  "version": "1.0.0",
+  "description": "Generate styles on the fly",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bredele/styles-generator.git"
+  },
+  "keywords": [
+    "styles",
+    "generator"
+  ],
+  "author": "Olivier Wietrich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bredele/styles-generator/issues"
+  },
+  "homepage": "https://github.com/bredele/styles-generator#readme",
+  "devDependencies": {
+    "tape": "^4.6.3"
+  }
+}
