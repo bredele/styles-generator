@@ -1,6 +1,6 @@
 {
   "name": "styles-generator",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Generate styles on the fly",
   "main": "index.js",
   "directories": {
