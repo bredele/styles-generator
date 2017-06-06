@@ -41,3 +41,13 @@ test('generate style from rule matching a mixin', assert => {
   })
   assert.equal(css('small-caps'), 'font-variant:small-caps;')
 })
+
+test('generate style from rule with multiple hyphens', assert => {
+  assert.plan(1)
+  const css = styles({
+    'padding': (value) => {
+      return `padding:${value === 'extra-small' ? '.25' : '0'}rem;`
+    }
+  })
+  assert.equal(css('padding-extra-small'), 'padding:.25rem;')
+})
