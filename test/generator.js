@@ -46,9 +46,21 @@ test('generate style from rule with multiple hyphens', assert => {
   assert.plan(1)
   const css = styles({
     'padding': (value) => {
-      console.log('value is', value)
       return `padding:${value === 'extra-small' ? '.25' : '0'}rem;`
     }
   })
   assert.equal(css('padding-extra-small'), 'padding:.25rem;')
+})
+
+test('generate style from rule with multiple hyphens and mixins', assert => {
+  assert.plan(1)
+  const css = styles({
+    'padding': (value) => {
+      return `padding:0;`
+    },
+    'padding-top': (value) => {
+      return `padding-top:0;`
+    }
+  })
+  assert.equal(css('padding-top-small'), 'padding-top:0;')
 })

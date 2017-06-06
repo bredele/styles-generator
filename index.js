@@ -79,15 +79,16 @@ function index (styles, mixins) {
   const length = styles.length
   let i = 0
   let rule = ''
+  var idx = i
   while (i < length) {
     const tmp = styles[i]
     rule = rule
       ? (rule + '-' + tmp)
       : tmp
-    if (mixins[rule]) break
+    if (mixins[rule]) idx = i
     i++
   }
-  if(i === length) i = 1
-  else if (!i) i = length - 1
-  return length - i
+  if(idx === length) idx = 1
+  else if (!idx) idx = length - 1
+  return length - idx
 }
