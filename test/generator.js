@@ -42,7 +42,7 @@ test('generate style from rule matching a mixin', assert => {
   assert.equal(css('small-caps'), 'font-variant:small-caps;')
 })
 
-test('generate style from rule with multiple hyphens', assert => {
+test('generate style from rule with 2 hyphens', assert => {
   assert.plan(1)
   const css = styles({
     'padding': (value) => {
@@ -52,7 +52,7 @@ test('generate style from rule with multiple hyphens', assert => {
   assert.equal(css('padding-extra-small'), 'padding:.25rem;')
 })
 
-test('generate style from rule with multiple hyphens and mixins', assert => {
+test('generate style from rule with 2 hyphens and corresponding mixins', assert => {
   assert.plan(1)
   const css = styles({
     'padding': (value) => {
@@ -63,4 +63,17 @@ test('generate style from rule with multiple hyphens and mixins', assert => {
     }
   })
   assert.equal(css('padding-top-small'), 'padding-top:0;')
+})
+
+test('generate style from rule with 3 or more hyphens', assert => {
+  assert.plan(1)
+  const css = styles({
+    'padding': (value) => {
+      return `padding:0;`
+    },
+    'padding-top': (value) => {
+      return `padding-top:0;`
+    }
+  })
+  assert.equal(css('padding-top-extra-small'), 'padding-top:0;')
 })

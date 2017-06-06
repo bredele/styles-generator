@@ -85,10 +85,8 @@ function index (styles, mixins) {
     rule = rule
       ? (rule + '-' + tmp)
       : tmp
-    if (mixins[rule]) idx = i
+    if (mixins[rule]) idx = i + 1
     i++
   }
-  if(idx === length) idx = 1
-  else if (!idx) idx = length - 1
-  return length - idx
+  return idx ? idx : length - 1
 }
