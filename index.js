@@ -34,19 +34,60 @@ module.exports = function(mixins = {}) {
 
   return (style) => {
     let cb = mixins[style]
-    if(cb) return cb()
-    const {rule, value} = parse(style)
+    if (cb) return cb()
+    const {rule, value} = parse(style, mixins)
     cb = mixins[rule]
     return cb ? cb(value) : `${rule}:${value};`
   }
 }
 
 
-function parse (style) {
-  style = style.split('-')
-  const value = style.length > 1 ? style.pop() : null
+/**
+ * Parse style to extract rule as well as its value.
+ *
+ * Examples:
+ *
+ *  parse('margin-top-10')
+ *  // => {rule: 'margin-top', value: '10'}
+ *
+ * @param {String} styles
+ * @param {Object} mixins
+ * @return {Object}
+ * @api private
+ */
+
+function parse (style, mixins) {
+  let arr = style.split('-')
+  var value = arr.splice(index(arr, mixins))
   return {
-    rule: style.join('-'),
-    value: value
+    rule: arr.join('-'),
+    value: value.join('-')
   }
+}
+
+
+/**
+ * Determine the index of the value.
+ *
+ * @param {Array} styles
+ * @param {Array} mixins
+ * @return {Number}
+ * @api private
+ */
+
+function index (styles, mixins) {
+  const length = styles.length
+  let i = 0
+  let rule = ''
+  while (i < length) {
+    const tmp = styles[i]
+    rule = rule
+      ? (rule + '-' + tmp)
+      : tmp
+    if (mixins[rule]) break
+    i++
+  }
+  if(i === length) i = 1
+  else if (!i) i = length - 1
+  return length - i
 }
