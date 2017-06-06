@@ -35,10 +35,18 @@ module.exports = function(mixins = {}) {
   return (style) => {
     let cb = mixins[style]
     if(cb) return cb()
-    style = style.split('-')
-    const value = style.length > 1 ? style.pop() : null
-    const rule = style.join('-')
+    const {rule, value} = parse(style)
     cb = mixins[rule]
     return cb ? cb(value) : `${rule}:${value};`
+  }
+}
+
+
+function parse (style) {
+  style = style.split('-')
+  const value = style.length > 1 ? style.pop() : null
+  return {
+    rule: style.join('-'),
+    value: value
   }
 }
