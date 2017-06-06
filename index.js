@@ -16,7 +16,7 @@
  * @api public
  */
 
-module.exports = function(mixins) {
+module.exports = function(mixins = {}) {
 
   /**
    * Generate styles based on given rules.
@@ -33,12 +33,12 @@ module.exports = function(mixins) {
    */
 
   return (style) => {
+    let cb = mixins[style]
+    if(cb) return cb()
     style = style.split('-')
     const value = style.length > 1 ? style.pop() : null
     const rule = style.join('-')
-    const cb = mixins && mixins[rule]
-    return cb
-      ? cb(value)
-      : `${rule}:${value};`
+    cb = mixins[rule]
+    return cb ? cb(value) : `${rule}:${value};`
   }
 }
