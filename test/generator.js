@@ -22,3 +22,14 @@ test('generate style based on constructor mixin', assert => {
   })
   assert.equal(css('margin-top-10'), 'margin-top:10rem;')
 })
+
+
+test('generate style with custom rule without hyphens', assert => {
+  assert.plan(1)
+  const css = styles({
+    'measure': () => {
+      return 'max-width:30em;'
+    }
+  })
+  assert.equal(css('measure'), 'max-width:30em;')
+})

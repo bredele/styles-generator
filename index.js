@@ -34,7 +34,7 @@ module.exports = function(mixins) {
 
   return (style) => {
     style = style.split('-')
-    const value = style.pop()
+    const value = style.length > 1 ? style.pop() : null
     const rule = style.join('-')
     const cb = mixins && mixins[rule]
     return cb
